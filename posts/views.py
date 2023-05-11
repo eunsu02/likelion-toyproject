@@ -6,7 +6,7 @@ from .models import  *
 from django.db import models
 import json
 
-#방명록 삭제
+#방명록 삭제하기
 @require_http_methods(["DELETE"])
 def delete_post(request,id):
     delete_post=get_object_or_404(Post,pk=id)
@@ -18,7 +18,7 @@ def delete_post(request,id):
     })
 
 
-#방명록 조회
+#방명록 조회하기
 @require_http_methods(["GET"])
 def get_all(request):
     posts=Post.objects.all()
@@ -37,7 +37,7 @@ def get_all(request):
         'data':category_list
     })
     
-#방명록 생성
+#방명록 생성하기
 @require_http_methods(["POST"])
 def create_post(request):
     body=json.loads(request.body.decode('utf-8'))
