@@ -5,7 +5,8 @@ from django.views.decorators.http import require_http_methods
 from .models import  *
 from django.db import models
 import json
-# Create your views here.
+
+#방명록 삭제
 @require_http_methods(["DELETE"])
 def delete_post(request,id):
     delete_post=get_object_or_404(Post,pk=id)
@@ -13,10 +14,11 @@ def delete_post(request,id):
     
     return JsonResponse({
         'status':200,
-        'message':'게시글 삭제 성공',
+        'message':'방명록 삭제 성공',
     })
 
 
+#방명록 조회
 @require_http_methods(["GET"])
 def get_all(request):
     posts=Post.objects.all()
@@ -31,10 +33,11 @@ def get_all(request):
         
     return JsonResponse({
         'status':200,
-        'message':'모든 게시글 조회 성공',
+        'message':'모든 방명록 조회 성공',
         'data':category_list
     })
     
+#방명록 생성
 @require_http_methods(["POST"])
 def create_post(request):
     body=json.loads(request.body.decode('utf-8'))
