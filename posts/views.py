@@ -7,16 +7,29 @@ from django.db import models
 import json
 
 #방명록 삭제하기
-@require_http_methods(["DELETE"])
-def delete_post(request,id):
-    delete_post=get_object_or_404(Post,pk=id)
-    delete_post.delete()
+@require_http_methods(["DELETE","GET"])
+def post_detail(request,id):
+    if request.method=="DELETE":
+        delete_post=get_object_or_404(Post,pk=id)
+        delete_post.delete()
     
-    return JsonResponse({
-        'status':200,
-        'message':'방명록 삭제 성공',
-    })
-
+        return JsonResponse({
+            'status':200,
+            'message':'방명록 삭제 성공',
+        })
+    elif request.method=="GET":
+        post=get_object_or_404(Post,pk=id)
+        category_json={
+            "id":post.post_id,
+            "name":post.name,
+            "content":post.content
+        }
+    
+        return JsonResponse({
+            'status':200,
+            'message':'게시글 조회 성공',
+            'data':category_json
+        })
 
 #방명록 조회하기
 @require_http_methods(["GET"])
