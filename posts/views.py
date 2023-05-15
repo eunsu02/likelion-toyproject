@@ -22,7 +22,8 @@ def post_detail(request,id):
         category_json={
             "id":post.post_id,
             "name":post.name,
-            "content":post.content
+            "content":post.content,
+            "created_at":post.created_at.strftime('%Y-%m-%d %H:%M')
         }
     
         return JsonResponse({
