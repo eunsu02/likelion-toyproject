@@ -143,7 +143,7 @@ TIME_ZONE = 'Asia/Seoul' # default UTC, Asia/Seoul은 +9 hours
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False #default True
 
 
 # Static files (CSS, JavaScript, Images)
